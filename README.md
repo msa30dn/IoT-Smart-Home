@@ -91,7 +91,7 @@ Local controller đóng vai trò máy chủ cục bộ (dùng WSL Ubuntu trên l
 
 ### Tiến độ và tình trạng công việc
 
-1) Xác định yêu cầu cơ bản (baseline), miêu tả và thiết kế hệ thống --> done (S. Hùng)
+1) Xác định yêu cầu cơ bản (baseline), miêu tả và thiết kế hệ thống kèm tài liệu --> Cơ bản đã xong, chỉ còn thiếu nội dung tài liệu cho Control Logic và một high-level architecture diagram (S. Hùng)
 
 2) Giải pháp sử dụng WSL (Ubuntu) của Windows để cài một MQTT broker. Đồng thời định nghĩa các message giao tiếp giữa các thành phần MQTT  --> done (S. Hùng)
 
