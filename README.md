@@ -2,6 +2,8 @@
 
 ## Miêu tả hệ thống
 
+*(Một diagram miểu tả high-level thiết kế hệ thống - đang cập nhật)*
+
 **1) Hai bo mạch ESP32**
 
 Node 1: "ESP32 Cảm biến" đọc dữ liệu từ hai cảm biến nhiệt độ (bên trong phòng và không khí tự nhiên bên ngoài), sau đó gửi các giá trị đo được lên MQTT topic đặt trên máy WSL. Node 1 không cần gửi quá dầy đặc liên tục, thay vào đó cứ n (ví dụ 10) giây 1 một lần.
