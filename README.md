@@ -96,6 +96,14 @@ Và còn nữa....
 
 4) Thiết kế Blynk Dashboard cho Điều khiển thủ công --> done (S. Hùng)
 
-5) Code nhúng mẫu để sử dụng IoT CLoud Blynk điều khiển thủ công qua Internet. Đồng thời tích hợp chức năng đọc các lệnh điều khiển gửi từ  "Local Controller" qua MQTT vào cùng một code với Blynk. -  Lưu ý chỉ có phần liên quan Blynk và kết nối MQTT để đọc lấy ra lệnh điều khiển, chưa có code cho việc điều khiển các thiết bị chấp hành (quạn thông gió, điều hòa) thực sự --> in progress (đã xong phần cơ bản, đã gửi cho team xem trước) (S. Hùng)
+5) Code nhúng mẫu để sử dụng IoT CLoud Blynk điều khiển thủ công qua Internet. Đồng thời tích hợp chức năng đọc các lệnh điều khiển gửi từ  "Local Controller" qua MQTT vào cùng một code với Blynk -  Lưu ý chỉ có phần liên quan Blynk và kết nối MQTT để đọc lấy ra lệnh điều khiển, chưa có code cho việc điều khiển các thiết bị chấp hành (quạn thông gió, điều hòa) thực sự --> in progress (đã xong phần cơ bản, đã gửi cho team xem trước) (S. Hùng)
 
-6) Các việc khác ...
+6) Build node 1 --> Chinh + Hưng
+
+7) Build node 2 --> Phần code Blynk và MQTT đã xong và bàn giao cho Chinh để Chinh hoàn thiện node 2.
+
+8) Triển khai thành đầy đủ hệ thống (ghép nối các thành phần lại) để sẵn sàng demo --> Cần thiết lập trên máy tính của một ai đó (Chinh ?) để làm demo (máy của 1 bạn khác, S. Hùng ?, để backup)
+
+9) Báo cáo nhóm --> Hưng
+
+10) Slide --> S. Hùng
