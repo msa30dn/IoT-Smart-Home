@@ -82,3 +82,20 @@ Local controller đóng vai trò máy chủ cục bộ (dùng WSL Ubuntu trên l
 ```
 
 Và còn nữa....
+
+
+---
+
+### Tiến độ và tình trạng công việc
+
+1) Xác định yêu cầu cơ bản (baseline), miêu tả và thiết kế hệ thống --> done (S. Hùng)
+
+2) Giải pháo sử dụng WSL (Ubuntu) của Windows để cài một MQTT broker. Đồng thời định nghĩa các message giao tiếp giữa các thành phần MQTT  --> done (S. Hùng)
+
+3) Viết Python code cho  "Local Controller" - chịu trách nhiệm chính về logic điều khiển và tương tác với 2 ESP32 nodes qua MQTT --> in progress (almost done) (S. Hùng)
+
+4) Thiết kế Blynk Dashboard cho Điều khiển thủ công --> done (S. Hùng)
+
+5) Code nhúng mẫu để sử dụng IoT CLoud Blynk điều khiển thủ công qua Internet. Đồng thời tích hợp chức năng đọc các lệnh điều khiển gửi từ  "Local Controller" qua MQTT vào cùng một code với Blynk. -  Lưu ý chỉ có phần liên quan Blynk và kết nối MQTT để đọc lấy ra lệnh điều khiển, chưa có code cho việc điều khiển các thiết bị chấp hành (quạn thông gió, điều hòa) thực sự --> in progress (đã xong phần cơ bản, đã gửi cho team xem trước) (S. Hùng)
+
+6) Các việc khác ...
