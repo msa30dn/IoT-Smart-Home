@@ -99,11 +99,11 @@ Local controller đóng vai trò máy chủ cục bộ (dùng WSL Ubuntu trên l
 
 4) Thiết kế Blynk Dashboard cho Điều khiển thủ công --> done (S. Hùng)
 
-5) Code nhúng mẫu cho IoT CLoud Blynk, điều khiển thủ công qua Internet. Đồng thời tích hợp chức năng đọc các lệnh điều khiển qua MQTT vào cùng một code -  Lưu ý chỉ có phần liên quan Blynk và kết nối MQTT để đọc lấy ra lệnh điều khiển - chưa có code cho việc điều khiển các thiết bị chấp hành (quạt thông gió, điều hòa) thực sự --> in progress (đã xong phần cơ bản, đã gửi cho team xem trước) (S. Hùng)
+5) Code nhúng mẫu cho IoT CLoud Blynk, điều khiển thủ công qua Internet. Đồng thời tích hợp chức năng đọc các lệnh điều khiển qua MQTT vào cùng một code. Lưu ý cái này chỉ tập trung vào Blynk và MQTT - không bao gồm code cho việc điều khiển các thiết bị chấp hành (quạt thông gió, điều hòa) thực sự --> xong cơ bản, đã gửi cho team xem trước (S. Hùng)
 
 6) Build node 1 --> Chinh + Hưng
 
-7) Build node 2 --> Phần code Blynk và MQTT đã xong và bàn giao cho Chinh để Chinh hoàn thiện node 2.
+7) Build node 2 --> Chinh giúp hoàn thiện (Phần code nhúng mẫu Blynk và MQTT đã xong, S. Hùng bàn giao cho)
 
 8) Triển khai thành đầy đủ hệ thống (ghép nối các thành phần lại) để sẵn sàng demo --> Cần thiết lập trên máy tính của một ai đó (?) để làm demo (máy của 1 bạn khác, ?, để backup)
 
