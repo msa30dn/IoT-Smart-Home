@@ -22,8 +22,8 @@ WiFiClient wifiClient;
 PubSubClient mqttClient(wifiClient);
 
 // ----------------- MQTT config (from Blynk) -----------------
-static char mqttHost[64] = "192.168.1.20";     // default fallback
-static uint16_t mqttPort = 1883;               // default fallback
+static char mqttHost[64] = "<Your MQTT hostname or IP here>";     // default fallback
+static uint16_t mqttPort = 1888;               // default fallback
 static bool mqttConfigReady = false;           // becomes true when we have host+port
 
 // ----------------- MQTT retry/disable logic -----------------
@@ -49,8 +49,8 @@ BLYNK_WRITE(V2) {
   Serial.println(param.asInt());
 }
 
-// V10: MQTT_HOST (String)
-BLYNK_WRITE(V10) {
+// V3: MQTT_HOST (String)
+BLYNK_WRITE(V3) {
   String s = param.asString();
   s.trim();
 
@@ -74,8 +74,8 @@ BLYNK_WRITE(V10) {
   applyMqttServer();
 }
 
-// V11: MQTT_PORT (Integer)
-BLYNK_WRITE(V11) {
+// V4: MQTT_PORT (Integer)
+BLYNK_WRITE(V4) {
   int p = param.asInt();
   if (p <= 0 || p > 65535) {
     Serial.println("[CFG] MQTT_PORT invalid -> ignore");
@@ -92,13 +92,12 @@ BLYNK_WRITE(V11) {
 
   applyMqttServer();
 }
-
 // Called when device connects to Blynk server
 BLYNK_CONNECTED() {
   // Pull latest config values from server when online
-  Serial.println("[Blynk] Connected -> syncing MQTT config (V10, V11)...");
-  Blynk.syncVirtual(V10);
-  Blynk.syncVirtual(V11);
+  Serial.println("[Blynk] Connected -> syncing MQTT config (V3, V4)...");
+  Blynk.syncVirtual(V3);
+  Blynk.syncVirtual(V4);
 }
 
 // ----------------- MQTT callbacks -----------------
