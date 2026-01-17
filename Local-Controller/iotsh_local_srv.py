@@ -105,7 +105,7 @@ import paho.mqtt.client as mqtt
 
 # MQTT config
 MQTT_HOST = "localhost"
-MQTT_PORT = 1883
+MQTT_PORT = 1888
 
 TOPIC_TEMP = "home/room1/temperature"
 TOPIC_CMD = "home/room1/actuator/cmd"
