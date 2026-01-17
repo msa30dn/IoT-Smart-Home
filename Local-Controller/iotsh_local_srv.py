@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """
+Author: Hung S. Nguyen
+Date: 2026
+
+
 This script runs on the local server (WSL Ubuntu) and acts as the “brain” of the
 limited-scope MSE IoT project:
 
@@ -99,9 +103,7 @@ from typing import Optional, Tuple
 import paho.mqtt.client as mqtt
 
 
-# =========================
 # MQTT config
-# =========================
 MQTT_HOST = "localhost"
 MQTT_PORT = 1883
 
@@ -109,9 +111,7 @@ TOPIC_TEMP = "home/room1/temperature"
 TOPIC_CMD = "home/room1/actuator/cmd"
 
 
-# =========================
 # Policy config
-# =========================
 # Hysteresis thresholds:
 # - Turn ON only when inside >= ON_THRESHOLD_C
 # - Turn OFF only when inside <= OFF_THRESHOLD_C
@@ -137,9 +137,7 @@ DECISION_MIN_INTERVAL_S = 3.0
 FORBID_BOTH_ON = False
 
 
-# =========================
 # State
-# =========================
 @dataclass
 class Snapshot:
     inside_c: float
@@ -166,7 +164,7 @@ class IoTSmartHomeLocalController:
         self.state = ControllerState()
         self.last_snapshot: Optional[Snapshot] = None
 
-    # ---------- MQTT callbacks ----------
+    #  MQTT callbacks 
     def on_connect(self, client: mqtt.Client, userdata, flags, reason_code, properties=None):
         print("Connected to MQTT, reason_code:", reason_code)
         client.subscribe(TOPIC_TEMP)
@@ -184,7 +182,7 @@ class IoTSmartHomeLocalController:
         self.last_snapshot = snap
         self.evaluate_and_publish(client, snap)
 
-    # ---------- Parsing ----------
+    #  Parsing 
     @staticmethod
     def parse_snapshot(payload_bytes: bytes) -> Snapshot:
         raw = payload_bytes.decode("utf-8", errors="replace").strip()
@@ -206,7 +204,7 @@ class IoTSmartHomeLocalController:
             device_id=device_id,
         )
 
-    # ---------- Decision ----------
+    #  Decision 
     def decide(self, snap: Snapshot) -> Tuple[str, str]:
         """
         Returns (desired_state, reason)
@@ -259,7 +257,7 @@ class IoTSmartHomeLocalController:
         # Defensive fallback
         return "idle", "fallback_idle"
 
-    # ---------- Mapping ----------
+    #  Mapping 
     @staticmethod
     def desired_to_outputs(desired: str) -> Tuple[int, int]:
         """
@@ -279,7 +277,7 @@ class IoTSmartHomeLocalController:
             return 1, 1
         raise ValueError(f"Unknown desired state: {desired}")
 
-    # ---------- Publishing ----------
+    #  Publishing 
     def publish_cmd(self, client: mqtt.Client, desired: str, reason: str, snap: Snapshot):
         relay, fan = self.desired_to_outputs(desired)
 

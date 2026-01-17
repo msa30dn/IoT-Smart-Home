@@ -1,3 +1,8 @@
+"""
+Author: Hung S. Nguyen
+Date: 2026
+"""
+
 #define BLYNK_TEMPLATE_ID             "TMPL6OE_pG3d1"
 #define BLYNK_TEMPLATE_NAME           "MSE IoT ESP32"
 #define BLYNK_FIRMWARE_VERSION        "0.1.0"
@@ -11,31 +16,31 @@
 #include <PubSubClient.h>
 #include "BlynkEdgent.h"
 
-// ----------------- GPIO -----------------
+//  GPIO 
 #define AC_PIN  2
 #define FAN_PIN 4
 
-// ----------------- MQTT topic -----------------
+//  MQTT topic 
 static const char* TOPIC_CMD = "home/room1/actuator/cmd";
 
 WiFiClient wifiClient;
 PubSubClient mqttClient(wifiClient);
 
-// ----------------- MQTT config (from Blynk) -----------------
+//  MQTT config (from Blynk) 
 static char mqttHost[64] = "<Your MQTT hostname or IP here>";     // default fallback
 static uint16_t mqttPort = 1888;               // default fallback
 static bool mqttConfigReady = false;           // becomes true when we have host+port
 
-// ----------------- MQTT retry/disable logic -----------------
+//  MQTT retry/disable logic 
 static bool mqttEnabled = true;
 static uint8_t mqttFailCount = 0;
 static const uint8_t MQTT_MAX_FAILS = 3;
 
-// ----------------- Forward decl -----------------
+//  Forward decl 
 void applyMqttServer();
 void ensureMqttConnected();
 
-// ----------------- Blynk handlers -----------------
+//  Blynk handlers 
 BLYNK_WRITE(V0) {
   Serial.print("BLYNK_WRITE V0: ");
   Serial.println(param.asInt());
@@ -100,7 +105,7 @@ BLYNK_CONNECTED() {
   Blynk.syncVirtual(V4);
 }
 
-// ----------------- MQTT callbacks -----------------
+//  MQTT callbacks 
 void onMqttMessage(char* topic, byte* payload, unsigned int length)
 {
   Serial.print("[MQTT RX] ");
@@ -113,7 +118,7 @@ void onMqttMessage(char* topic, byte* payload, unsigned int length)
   Serial.println(msg);
 }
 
-// ----------------- MQTT server apply -----------------
+//  MQTT server apply 
 void applyMqttServer()
 {
   // (Re)configure MQTT server endpoint
@@ -131,7 +136,7 @@ void applyMqttServer()
   Serial.println(mqttPort);
 }
 
-// ----------------- MQTT connect/reconnect -----------------
+//  MQTT connect/reconnect 
 void ensureMqttConnected()
 {
   if (!mqttEnabled) return;
