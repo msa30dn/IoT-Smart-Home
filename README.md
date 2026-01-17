@@ -2,7 +2,7 @@
 
 ## Miêu tả hệ thống
 
-*(Một diagram miểu tả high-level thiết kế hệ thống - đang cập nhật)*
+![Architecture](resources/architecture.png)
 
 **1) Hai bo mạch ESP32**
 
