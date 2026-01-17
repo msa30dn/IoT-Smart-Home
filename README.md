@@ -134,7 +134,7 @@ Tuy nhiên, việc chuyển đổi giữa các trạng thái đang bật (fan <-
 
 4) Thiết kế Blynk Dashboard cho Điều khiển thủ công --> DONE (S. Hùng)
 
-5) Code nhúng mẫu cho IoT CLoud Blynk, điều khiển thủ công qua Internet. Đồng thời tích hợp chức năng đọc các lệnh điều khiển qua MQTT vào cùng một code. Lưu ý cái này chỉ tập trung vào Blynk và MQTT - không bao gồm code cho việc điều khiển các thiết bị chấp hành (quạt thông gió, điều hòa) thực sự --> DONE, check it out here [ESP32-Blynk-Local-MQTT](ESP32-Blynk-Local-MQTT) (S. Hùng)
+5) Code nhúng mẫu cho IoT CLoud Blynk, điều khiển thủ công qua Internet. Đồng thời tích hợp chức năng đọc các lệnh điều khiển qua MQTT vào cùng một code. Lưu ý cái này chỉ tập trung vào Blynk và MQTT - không bao gồm code cho việc điều khiển các thiết bị chấp hành (quạt thông gió, điều hòa) --> DONE, check it out here [ESP32-Blynk-Local-MQTT](ESP32-Blynk-Local-MQTT) (S. Hùng)
 
 6) Build node 1 --> Chinh + Hưng
 
