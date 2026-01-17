@@ -126,24 +126,24 @@ Tuy nhiên, việc chuyển đổi giữa các trạng thái đang bật (fan <-
 
 ### Tiến độ và tình trạng công việc
 
-1) Xác định yêu cầu cơ bản (baseline), miêu tả và thiết kế hệ thống kèm tài liệu --> Cơ bản đã xong, chỉ còn thiếu nội dung tài liệu cho Control Logic và một high-level architecture diagram (S. Hùng)
+1) Xác định yêu cầu cơ bản (baseline), miêu tả và thiết kế hệ thống kèm tài liệu --> DONE (S. Hùng)
 
-2) Giải pháp sử dụng WSL (Ubuntu) của Windows để cài một MQTT broker. Đồng thời định nghĩa các message giao tiếp giữa các thành phần MQTT  --> done (S. Hùng)
+2) Giải pháp sử dụng WSL (Ubuntu) của Windows để cài một MQTT broker. Đồng thời định nghĩa các message giao tiếp giữa các thành phần MQTT  --> DONE (S. Hùng)
 
-3) Viết Python code cho  "Local Controller" - chịu trách nhiệm chính về logic điều khiển và tương tác với 2 ESP32 nodes qua MQTT --> in progress (almost done) (S. Hùng)
+3) Viết Python code cho  "Local Controller" - chịu trách nhiệm chính về logic điều khiển và tương tác với 2 ESP32 nodes qua MQTT --> DONE (S. Hùng)
 
-4) Thiết kế Blynk Dashboard cho Điều khiển thủ công --> done (S. Hùng)
+4) Thiết kế Blynk Dashboard cho Điều khiển thủ công --> DONE (S. Hùng)
 
-5) Code nhúng mẫu cho IoT CLoud Blynk, điều khiển thủ công qua Internet. Đồng thời tích hợp chức năng đọc các lệnh điều khiển qua MQTT vào cùng một code. Lưu ý cái này chỉ tập trung vào Blynk và MQTT - không bao gồm code cho việc điều khiển các thiết bị chấp hành (quạt thông gió, điều hòa) thực sự --> xong cơ bản, đã gửi cho team xem trước (S. Hùng)
+5) Code nhúng mẫu cho IoT CLoud Blynk, điều khiển thủ công qua Internet. Đồng thời tích hợp chức năng đọc các lệnh điều khiển qua MQTT vào cùng một code. Lưu ý cái này chỉ tập trung vào Blynk và MQTT - không bao gồm code cho việc điều khiển các thiết bị chấp hành (quạt thông gió, điều hòa) thực sự --> DONE, check it out here [ESP32-Blynk-Local-MQTT](ESP32-Blynk-Local-MQTT) (S. Hùng)
 
 6) Build node 1 --> Chinh + Hưng
 
-7) Build node 2 --> Chinh giúp hoàn thiện (Phần code nhúng mẫu Blynk và MQTT đã xong, S. Hùng bàn giao cho)
+7) Build node 2 --> Chinh hoàn thiện nốt (Regarding to Blynk và MQTT code example, refer to[ESP32-Blynk-Local-MQTT](ESP32-Blynk-Local-MQTT) by S. Hung)
 
 8) Triển khai thành đầy đủ hệ thống (ghép nối các thành phần lại) để sẵn sàng demo --> Cần thiết lập trên máy tính của một ai đó (?) để làm demo (máy của 1 bạn khác, ?, để backup)
 
 9) Báo cáo nhóm --> Hưng
 
-10) Slide --> S. Hùng
+10) Slide --> chưa làm, S. Hùng
 
 FINISH
