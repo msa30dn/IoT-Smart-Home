@@ -2,13 +2,13 @@
 
 ## Miêu tả hệ thống
 
-![Architecture](resources/architecture.png)
+<img src="resources/architecture.png" width="912">
 
 **1) Hai bo mạch ESP32**
 
 Node 1: "ESP32 Cảm biến" đọc dữ liệu từ hai cảm biến nhiệt độ (bên trong phòng và không khí tự nhiên bên ngoài), sau đó gửi các giá trị đo được lên MQTT topic đặt trên máy WSL. Node 1 không cần gửi quá dầy đặc liên tục, thay vào đó cứ n (ví dụ 10) giây 1 một lần.
 
-Node 2: ESP32 Điều khiển", nó đăng ký (subscribe) topic nhận lệnh từ MQTT, và điều khiển động cơ và rơ-le dựa trên các tín hiệu/lệnh điều khiển nhận được. Ngoài ra nó cho phép Điều khiển thủ công qua Blynk với Blynk.Edgent được tích hợp. Nếu "auto mode" bị chọn tắt (từ Blynk) thì node bỏ qua các lệnh gửi từ Local controller, mà thực thi theo lệnh điều khiển thủ công từ Blynk - mặc định "auto mode" is ON)
+Node 2: ESP32 Điều khiển" (còn gọi là Chấp hành), nó đăng ký (subscribe) topic nhận lệnh từ MQTT, và điều khiển động cơ và rơ-le dựa trên các tín hiệu/lệnh điều khiển nhận được. Ngoài ra nó cho phép Điều khiển thủ công qua Blynk với Blynk.Edgent được tích hợp. Nếu "auto mode" bị chọn tắt (từ Blynk) thì node bỏ qua các lệnh gửi từ Local controller, mà thực thi theo lệnh điều khiển thủ công từ Blynk - mặc định "auto mode" is ON)
 
 *Ghi chú: Sẽ rất tốt nếu hai bo mạch có màn hình hiển thị gì đó cho hấp dẫn*
 
@@ -82,10 +82,45 @@ Local controller đóng vai trò máy chủ cục bộ (dùng WSL Ubuntu trên l
 }
 ```
 
-## Control Logic 
+## Local Controller
 
-*(đang cập nhật)*
+Chương trình Local Controller được viết bằng Python, chạy trên máy chủ cục bộ (WSL Ubuntu) và đóng vai trò như "bộ não" của dự án MSE IoT trong phạm vi rút gọn:
 
+```
+  ESP32 cảm biến  --->  MQTT  --->  Python Controller  --->  MQTT  --->  ESP32 Chấp hành
+   (nhiệt độ trong/ngoài)                                (điều khiển relay + quạt)
+```
+
+Chương trình đọc các bản ghi nhiệt độ từ node cảm biến, áp dụng một chính sách điều khiển kiểu kiểu "thermostat"", và publish lệnh điều khiển tới một ESP32 Chấp hành để điều khiển:
+  - Relay cấp nguồn cho điều hòa (relay: 0/1)
+  - Quạt thông gió (fan: 0/1)
+
+**Chính sách điều khiển được định nghĩa như sau:**
+
+a) Các quy tắc cốt lõi:
+
+Hysteresis band (giúp tránh bật/tắt liên tục khi nhiệt độ dao động quanh ngưỡng):
+  * Chỉ bật làm mát/thông gió khi nhiệt độ trong nhà >= ON_THRESHOLD_C
+  * Chỉ tắt (về idle) khi nhiệt độ trong nhà <= OFF_THRESHOLD_C
+
+  Ví dụ: ON_THRESHOLD_C  = 26.0, OFF_THRESHOLD_C = 25.7 (nếu HYSTERESIS_C = 0.3)
+
+Lựa chọn trạng thái "bật" (ON) khi nhiệt độ trong nhà >= ON_THRESHOLD_C:
+  * Nếu trong nhà "rất nóng" (>= ON_THRESHOLD_C + ALL_DELTA_C) -> chọn "all" (bật cả điều hòa + quạt)
+  * Nếu không, và nhiệt độ ngoài trời <= OUTSIDE_COOL_C -> chọn "fan" (ưu tiên thông gió)
+  * Ngược lại -> chọn "ac"
+
+b) Các quy tắc nâng cấp theo thời gian (escalation):
+
+Nếu quạt đã chạy trong FAN_GRACE_S mà nhiệt độ vẫn >= ngưỡng ON -> chuyển sang "ac"
+
+Nếu điều hòa đã chạy trong AC_GRACE_S mà nhiệt độ vẫn >= ngưỡng ON -> chuyển sang "all". Nhưng chỉ khi nhiệt độ ngoài trời < nhiệt độ trong nhà (khi đó thông gió mới thực sự giúp thoát nhiệt)
+
+c) Quy tắc chống bật/tắt quá nhanh (anti-short-cycling, thời gian chạy tối thiểu):
+
+Khi bộ điều khiển đã bật một trạng thái khác "idle" (fan/ac/all), nó sẽ không cho phép chuyển về "idle" cho đến khi đã trôi qua MIN_ON_RUNTIME_S giây.
+
+Tuy nhiên, việc chuyển đổi giữa các trạng thái đang bật (fan <-> ac <-> all) vẫn được phép.
 
 ---
 
